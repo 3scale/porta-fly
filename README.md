@@ -4,6 +4,13 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 In the project directory, you can run:
 
+### `yarn lint`
+
+Runs the linter inside folder `src`. Run with `--fix` in order to apply all automatic fixes.
+```
+$ yarn lint --fix
+```
+
 ### `yarn start`
 
 Runs the app in the development mode.<br />

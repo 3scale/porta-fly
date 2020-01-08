@@ -1,25 +1,23 @@
-import * as React from 'react'
+import React from 'react'
+import { AppNavExpandable, IAppNavExpandableProps } from './AppNavExpandable'
+import { AppNavGroup, IAppNavGroupProps } from './AppNavGroup'
+import { AppNavItem, IAppNavItemProps } from './AppNavItem'
 import {
   Nav,
   NavList,
   NavVariants,
   Page,
   PageHeader,
-  PageSidebar,
-  SkipToContent,
   PageHeaderProps,
+  PageSidebar,
+  SkipToContent
 } from '@patternfly/react-core'
-import {AppNavExpandable, IAppNavExpandableProps} from './AppNavExpandable'
-import {AppNavGroup, IAppNavGroupProps} from './AppNavGroup'
-import {AppNavItem, IAppNavItemProps} from './AppNavItem'
 
 export interface IAppLayoutContext {
   setBreadcrumb: (breadcrumb: React.ReactNode) => void
 }
 
-export const AppLayoutContext = React.createContext<IAppLayoutContext>({
-  setBreadcrumb: () => void 0,
-})
+export const AppLayoutContext = React.createContext<IAppLayoutContext>({ setBreadcrumb: () => 0 })
 
 export interface IAppLayoutProps
   extends Pick<PageHeaderProps, 'logo'>,
@@ -45,7 +43,7 @@ export const AppLayout: React.FunctionComponent<IAppLayoutProps> = ({
   startWithOpenNav = true,
   theme = 'dark',
   mainContainerId = 'main-container',
-  children,
+  children
 }) => {
   const [isNavOpen, setIsNavOpen] = React.useState(startWithOpenNav)
   const [isMobileView, setIsMobileView] = React.useState(true)
@@ -88,18 +86,18 @@ export const AppLayout: React.FunctionComponent<IAppLayoutProps> = ({
         <Nav id="nav-primary-simple" theme={theme}>
           <NavList id="nav-list-simple" variant={variant}>
             {navItems.map((navItem, idx) => {
-              if (navItem && navItem.hasOwnProperty('items') && isVertical) {
+              if (navItem && ('items' in navItem) && isVertical) {
                 return navGroupsStyle === 'expandable' ? (
                   <AppNavExpandable
                     {...(navItem as IAppNavExpandableProps)}
                     key={idx}
                   />
                 ) : (
-                  <AppNavGroup {...(navItem as IAppNavGroupProps)} key={idx}/>
+                  <AppNavGroup {...(navItem as IAppNavGroupProps)} key={idx} />
                 )
               } else {
                 return (
-                  <AppNavItem {...(navItem as IAppNavItemProps)} key={idx}/>
+                  <AppNavItem {...(navItem as IAppNavItemProps)} key={idx} />
                 )
               }
             })}
@@ -132,7 +130,7 @@ export const AppLayout: React.FunctionComponent<IAppLayoutProps> = ({
       isMobileView,
       onNavToggle,
       onNavToggleMobile,
-      Navigation,
+      Navigation
     ]
   )
 
@@ -154,9 +152,9 @@ export const AppLayout: React.FunctionComponent<IAppLayoutProps> = ({
     <SkipToContent href="#primary-app-container">
       Skip to Content
     </SkipToContent>
-  );
+  )
   return (
-    <AppLayoutContext.Provider value={{setBreadcrumb: handleSetBreadcrumb}}>
+    <AppLayoutContext.Provider value={{ setBreadcrumb: handleSetBreadcrumb }}>
       <Page
         mainContainerId={mainContainerId}
         header={Header}

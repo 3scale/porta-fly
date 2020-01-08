@@ -3,11 +3,11 @@ import { useDocumentTitle } from '../components'
 import {
   PageSection,
   PageSectionVariants,
-  TextContent,
   Text,
-  TextVariants,
+  TextContent,
+  TextVariants
 } from '@patternfly/react-core'
-import { Table, TableHeader, TableBody } from '@patternfly/react-table'
+import { Table, TableBody, TableHeader } from '@patternfly/react-table'
 
 const Applications: React.FunctionComponent = () => {
   useDocumentTitle('Applications')
@@ -19,7 +19,7 @@ const Applications: React.FunctionComponent = () => {
     'Plan',
     'Created at'
   ]
-  let rows = [
+  const rows = [
     {
       cells: [
         'Application 1',
@@ -63,10 +63,10 @@ const Applications: React.FunctionComponent = () => {
       </PageSection>
 
       <PageSection>
-          <Table aria-label="Applications list" cells={columns} rows={rows}>
-            <TableHeader />
-            <TableBody />
-          </Table>     
+        <Table aria-label="Applications list" cells={columns} rows={rows}>
+          <TableHeader />
+          <TableBody />
+        </Table>
       </PageSection>
     </>
   )
